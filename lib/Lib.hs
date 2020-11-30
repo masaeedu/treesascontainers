@@ -12,6 +12,10 @@ class IsContainer (shape :: *) (singleton :: shape -> *) (position :: shape -> *
   convert :: f a -> Container shape singleton position a
   unconvert :: Container shape singleton position a -> f a
 
+  -- Laws:
+  -- convert . unconvert = id
+  -- unconvert . convert = id
+
 -- Here is how we define a standard binary tree
 data Tree a = Leaf a | Branch (Tree a) (Tree a)
   deriving (Show, Eq, Ord)
