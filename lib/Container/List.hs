@@ -1,5 +1,4 @@
 {-# LANGUAGE EmptyCase #-}
-{-# OPTIONS_GHC -Wno-orphans #-}
 
 module Container.List where
 
