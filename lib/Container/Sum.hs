@@ -2,7 +2,7 @@ module Container.Sum where
 
 import Container ( IsContainer(..), Container(..) )
 import Data.Functor.Sum ( Sum(..) )
-import Dependent
+import Dependent ( DSum(..) )
 
 instance
   ( IsContainer sl ssl pl fl
