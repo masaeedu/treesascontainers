@@ -1,5 +1,3 @@
-{-# LANGUAGE LambdaCase, PartialTypeSignatures #-}
-
 module Container.Tree where
 
 import Container ( IsContainer(..), Container(..) )

@@ -37,6 +37,9 @@ default-extensions:
 - FlexibleContexts
 - DefaultSignatures
 
+- LambdaCase
+- PartialTypeSignatures
+
 library:
   source-dirs: lib
 
