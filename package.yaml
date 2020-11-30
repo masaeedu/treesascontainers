@@ -25,6 +25,7 @@ default-extensions:
 - TypeApplications
 - TypeOperators
 - MultiParamTypeClasses
+- FunctionalDependencies
 
 - ConstraintKinds
 - DataKinds

@@ -1,6 +1,6 @@
 module Main where
 
-import Lib
+import Container.Tree ( testoutput )
 
 main :: IO ()
-main = putStrLn message
+main = putStrLn testoutput

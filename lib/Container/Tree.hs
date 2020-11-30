@@ -1,20 +1,9 @@
-{-# LANGUAGE LambdaCase, PartialTypeSignatures, FunctionalDependencies #-}
+{-# LANGUAGE LambdaCase, PartialTypeSignatures #-}
 
-module Lib where
+module Container.Tree where
 
+import Container ( IsContainer(..), Container(..) )
 import Data.Monoid ( Sum(..) )
-
-data Container (s :: *) (proxy :: s -> *) (p :: s -> *) (a :: *) = forall (x :: s). Container (proxy x) (p x -> a)
-
--- A container is (isomorphic to) a dependent sum of a shape and a function from a shape-appropriate position to values.
-class IsContainer (shape :: *) (singleton :: shape -> *) (position :: shape -> *) (f :: * -> *) | f -> shape singleton position, shape singleton position -> f
-  where
-  convert :: f a -> Container shape singleton position a
-  unconvert :: Container shape singleton position a -> f a
-
-  -- Laws:
-  -- convert . unconvert = id
-  -- unconvert . convert = id
 
 -- Here is how we define a standard binary tree
 data Tree a = Leaf a | Branch (Tree a) (Tree a)
@@ -83,8 +72,8 @@ test = leaf 1 `branch` (leaf 2 `branch` leaf 3) `branch` leaf 4
 foldMapTree :: Monoid m => (a -> m) -> Tree' a -> m
 foldMapTree f = matchTree f (\a b -> foldMapTree f a <> foldMapTree f b)
 
-message :: String
-message =
+testoutput :: String
+testoutput =
   "A sample tree looks like this: " <> show (unconvert test)
   <> "\n"
   <> "The sum of the numbers in the tree is: " <> show (foldMapTree Sum test)
