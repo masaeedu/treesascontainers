@@ -66,5 +66,18 @@ test = leaf 1 `branch` (leaf 2 `branch` leaf 3) `branch` leaf 4
 foldMapTree :: Monoid m => (a -> m) -> Tree a -> m
 foldMapTree f = matchTree f (\a b -> foldMapTree f a <> foldMapTree f b)
 
+-- We can make old trees from new ones...
+retro :: Tree a -> OGTree a
+retro = matchTree OGLeaf (\a b -> OGBranch (retro a) (retro b))
+
+-- And new trees from old ones...
+unretro :: OGTree a -> Tree a
+unretro (OGLeaf a) = leaf a
+unretro (OGBranch a b) = branch (unretro a) (unretro b)
+
+-- And these two form a bijection
+-- unretro . retro = id
+-- retro . unretro = id
+
 message :: String
 message = "The sum of the numbers in the tree is: " <> show (foldMapTree Sum test)
