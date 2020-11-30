@@ -2,7 +2,7 @@
 
 module Lib where
 
-import Data.Monoid
+import Data.Monoid ( Sum(..) )
 
 data Container (s :: *) (proxy :: s -> *) (p :: s -> *) (a :: *) = forall (x :: s). Container (proxy x) (p x -> a)
 
